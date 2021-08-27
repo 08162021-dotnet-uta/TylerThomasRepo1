@@ -1,30 +1,27 @@
-using System;
 using Xunit;
 using Project0.StoreApplication.Storage.Repositories;
 
-namespace Project.StoreApplication.Testing
+//a test suite in xUnit is just a standard class with methods implementing each unit test
+// return to https://auth0.com/blog/xunit-to-test-csharp-code/
+namespace Project0.StoreApplication.Testing
 {
   public class StoreRepositoryTests
   {
-    /*[Fact]
+    [Fact]
     public void Test_StoreCollection()
     {
-      // arrange = get instance of the entity to test 
-      var sut = new StoreRepository();
+      // arrange = instance of the entity to test
+      var sut = StoreRepository.Instance;
 
-      // act = execute sut for data 
+      // act = execute sut for data
       var actual = sut.Stores;
 
       // assert
       Assert.NotNull(actual);
     }
-    [Theory]
-    [InlineData(10)]
-    public void Test_OneStoreNegative(int i)
+    /*public class Validator
     {
-      var sut = new StoreRepository();
-      var store = sut.GetStore(i);
-      Assert.NotNull(store);
+
     }*/
   }
 }

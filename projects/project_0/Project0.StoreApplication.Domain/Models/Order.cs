@@ -1,13 +1,12 @@
-using System;
-
 namespace Project0.StoreApplication.Domain.Models
 {
-  class Order
+  /// <summary>
+  /// 
+  /// </summary>
+  public class Order
   {
-    public Customer Customer { get; set; }
+    public int OrderID { get; set; }
 
-    public Product Product { get; set; }
 
-    public Store Store { get; set; }
   }
 }

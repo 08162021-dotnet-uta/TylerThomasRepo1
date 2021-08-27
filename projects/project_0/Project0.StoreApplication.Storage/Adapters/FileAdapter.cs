@@ -1,38 +1,43 @@
-using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
+using Project0.StoreApplication.Domain.Abstracts;
 
 namespace Project0.StoreApplication.Storage.Adapters
 {
+  /// <summary>
+  /// 
+  /// </summary>
   public class FileAdapter
   {
-    public void List<Stores> ReadFromFile()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public List<T> ReadFromFile<T>(string path) where T : class
     {
-      // file path
-      string path = @"//revature/tyler_repo/data/project_0.xml";
-      // open file
+      if (!File.Exists(path))
+      {
+        return null;
+      }
+
       var file = new StreamReader(path);
-      // serialize object 
-      var xml = new XmlSerializer(typeof(Store));
-      // write to file
-      var stores = xml.Deserialize(file) as List<Stores>;
-      // close file 
-      file.Close();
-      // return data 
-      return stores;
+      var xml = new XmlSerializer(typeof(List<T>));
+      var result = xml.Deserialize(file) as List<T>;
+
+      return result;
     }
 
-    public void WriteToFile(List<Stores> stores)
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public void WriteToFile<T>(string path, List<T> data) where T : class
     {
-      // file path
-      string path = @"//revature/tyler_repo/data/project_0.xml";
-      // open file
       var file = new StreamWriter(path);
-      // serialize object 
-      var xml = new XmlSerializer(typeof(List<Stores>));
-      // write to file
-      xml.Serialize(file, stores);
-      // close file 
-      file.Close();
-      // return data 
+      var xml = new XmlSerializer(typeof(List<T>));
+
+      xml.Serialize(file, data);
     }
   }
 }
