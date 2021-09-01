@@ -74,7 +74,7 @@ namespace Project0.StoreApplication.Client
       }
     }*/
   }
-  public static void Main(string[] args)
+  private static void Main(string[] args)
   {
     Customer customerClient = new Customer("Nicholas", "salad", 1, 1);
     //to serialize object data to file
@@ -105,7 +105,16 @@ namespace Project0.StoreApplication.Client
     reader.Close();
     Console.WriteLine(customerClient.ToString);
 
-    //HelloSQL();
+    HelloSQL();
+  }
+
+  private static void HelloSQL()
+  {
+    var dat = new DataAdapter();
+    foreach (var thing in dat.GetCustomers)
+    {
+      Console.WriteLine(item);
+    }
   }
 }
 

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Project0.StoreApplication.Domain.Abstracts;
 using Project0.StoreApplication.Domain.Models;
 
+//Some guidance from https://docs.microsoft.com/en-us/ef/core/
 //needs handler (context) to understand relation between C# objects and SQL objects
 
 namespace Project0.StoreApplication.Storage.Adapters
@@ -18,7 +19,7 @@ namespace Project0.StoreApplication.Storage.Adapters
 
     protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
-      builder.UseSqlServer("server=(localdb)\\MSSQLLocalDB;database=StoreApplicationDB;Trusted_Connection=true;");
+      builder.UseSqlServer(@"server=(localdb)\MSSQLLocalDB;database=StoreApplicationDB;user id=sqladmin;password=Password12345;Trusted_Connection=true;");
       //change server data 
     }
   }
