@@ -1,23 +1,22 @@
+using System.Collections.Generic;
+//using System.Collections.Generic.List;
 using Microsoft.EntityFrameworkCore;
+using Project0.StoreApplication.Domain.Abstracts;
+using Project0.StoreApplication.Domain.Models;
 
 namespace Project0.StoreApplication.Storage.Adapters
 {
-  public class DataAdapter : DbContext //DbConnect expects OnConfiguring()
+  public class DataAdapter : DbContext
   {
-    public DbSet<Customer> Customers { get; set; } //represents serialization between customer object and customer table 
-
+    public DbSet<Customer> Customers { get; set; }
     public DbSet<Order> Orders { get; set; }
-
     public DbSet<Product> Products { get; set; }
-
     public DbSet<Store> Stores { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
-      //connection string
-      builder.UseSqlServer("server=(localdb)\\MSSQLLocalDB;database=StoreApplicationDB;user id=sqladmin;password=Password12345;")
-      //"server=;..." is the connection string
-      //do not push with id and password 
+      builder.UseSqlServer("server=(localdb)\\MSSQLLocalDB;database=StoreApplicationDB;Trusted_Connection=true;");
+      //change server data 
     }
   }
 }

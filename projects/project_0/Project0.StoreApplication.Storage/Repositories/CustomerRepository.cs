@@ -11,7 +11,7 @@ namespace Project0.StoreApplication.Storage.Repositories
   /// </summary>
   public class CustomerRepository : IRepository<Customer>
   {
-    private const string _path = @"/home/tyler/revature/tyler_repo/data/customers.xml";
+    private const string _path = @"/revature/tyler_repo/data/customers.xml";
     private static readonly FileAdapter _fileAdapter = new FileAdapter();
 
     public CustomerRepository()

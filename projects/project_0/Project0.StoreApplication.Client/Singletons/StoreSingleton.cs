@@ -3,6 +3,7 @@ using Project0.StoreApplication.Domain.Abstracts;
 using Project0.StoreApplication.Domain.Models;
 using Project0.StoreApplication.Storage.Repositories;
 
+
 //In this pattern, a class has only one instance in the program that provides a global point of access to it.
 namespace Project0.StoreApplication.Client.Singletons
 {

@@ -3,12 +3,11 @@ using Project0.StoreApplication.Domain.Abstracts;
 using Project0.StoreApplication.Domain.Models;
 using Project0.StoreApplication.Storage.Repositories;
 
+//singleton exists to manage interactions to repository 
+
 //In this pattern, a class has only one instance in the program that provides a global point of access to it.
 namespace Project0.StoreApplication.Client.Singletons
 {
-  /// <summary>
-  /// 
-  /// </summary>
   public sealed class CustomerSingleton
   {
     private static CustomerSingleton _customerSingleton;
@@ -27,10 +26,6 @@ namespace Project0.StoreApplication.Client.Singletons
         return _customerSingleton;
       }
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
     private CustomerSingleton()
     {
       Customers = _customerRepository.Select();

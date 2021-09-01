@@ -9,16 +9,16 @@ namespace Project0.StoreApplication.Storage.Repositories
   /// <summary>
   /// 
   /// </summary>
-  public class StoreRepository : IRepository<Store>
+  public class OrderRepository : IRepository<Order>
   {
     private const string _path = @"/revature/tyler_repo/data/stores.xml";
     private static readonly FileAdapter _fileAdapter = new FileAdapter();
 
-    public StoreRepository()
+    public OrderRepository()
     {
-      if (_fileAdapter.ReadFromFile<Store>(_path) == null)
+      if (_fileAdapter.ReadFromFile<Order>(_path) == null)
       {
-        _fileAdapter.WriteToFile<Store>(_path, new List<Store>());
+        _fileAdapter.WriteToFile<Order>(_path, new List<Order>());
       }
     }
 
@@ -35,9 +35,9 @@ namespace Project0.StoreApplication.Storage.Repositories
     /// 
     /// </summary>
     /// <returns></returns>
-    public bool Insert(Store entry)
+    public bool Insert(Order entry)
     {
-      _fileAdapter.WriteToFile<Store>(_path, new List<Store> { entry });
+      _fileAdapter.WriteToFile<Order>(_path, new List<Order> { entry });
 
       return true;
     }
@@ -46,16 +46,16 @@ namespace Project0.StoreApplication.Storage.Repositories
     /// 
     /// </summary>
     /// <returns></returns>
-    public List<Store> Select()
+    public List<Order> Select()
     {
-      return _fileAdapter.ReadFromFile<Store>(_path);
+      return _fileAdapter.ReadFromFile<Order>(_path);
     }
 
     /// <summary>
     /// 
     /// </summary>
     /// <returns></returns>
-    public Store Update()
+    public Order Update()
     {
       throw new System.NotImplementedException();
     }

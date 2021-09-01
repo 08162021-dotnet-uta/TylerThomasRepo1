@@ -7,7 +7,6 @@ namespace Project0.StoreApplication.Domain.Models
     public Chipotle3()
     {
       Name = "Chipotle Woodstock";
-      string storeChoice3 = Console.ReadLine();
     }
   }
 }
