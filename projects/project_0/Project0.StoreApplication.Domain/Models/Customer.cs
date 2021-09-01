@@ -22,6 +22,7 @@ namespace Project0.StoreApplication.Domain.Models
     interface ISerializable
     {
       void Customer();
+      //I only want a declaration
     }
 
     public Customer()

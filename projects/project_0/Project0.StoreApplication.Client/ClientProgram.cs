@@ -9,6 +9,10 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 
+//runtime monitoring information gleaned from https://youtu.be/SqxvleC0L4g
+// dotnet counters ps shows all programs that can be monitored
+// dotnet counters monitor -p 8572 shows System.Runtime
+
 namespace Project0.StoreApplication.Client
 {
   public class Program
@@ -20,13 +24,6 @@ namespace Project0.StoreApplication.Client
 
     private const string _myLogFilePath = @"revature/tyler_repo/data/logs.txt";
 
-    private static void Main(string[] args)
-    {
-      Log.Logger = new LoggerConfiguration().WriteTo.File(_myLogFilePath).CreateLogger();
-
-      //HelloSQL();
-    }
-
     private static void Run()
     {
       Log.Information("Method: Run()");
@@ -35,13 +32,14 @@ namespace Project0.StoreApplication.Client
       {
         _customerSingleton.Add(new Customer());
       }
-
+      Console.WriteLine(customer);
       var customer = _customerSingleton.Customers[Capture<Customer>(_customerSingleton.Customers)];
       var store = _storeSingleton.Stores[Capture<Store>(_storeSingleton.Stores)];
+      var order = _orderSingleton.Orders[Capture<Order>(_orderSingleton.Orders)];
+      var product = _productSingleton.Orders[Capture<Product>(_productSingleton.Products)];
 
-      Console.WriteLine(customer);
+
     }
-
     private static void Output<T>(List<T> data) where T : class
     {
       Log.Information($"method: Output<{typeof(T)}>()");
@@ -53,7 +51,6 @@ namespace Project0.StoreApplication.Client
         Console.WriteLine($"[{++index}] - {item}");
       }
     }
-
     private static int Capture<T>(List<T> data) where T : class
     {
       Log.Information("Method: Capture()");
@@ -76,24 +73,40 @@ namespace Project0.StoreApplication.Client
         Console.WriteLine(item);
       }
     }*/
+  }
+  public static void Main(string[] args)
+  {
+    Customer customerClient = new Customer("Nicholas", "salad", 1, 1);
+    //to serialize object data to file
+    Stream stream = File.Open("CustomerData.dat", FileMode.Create);
+    //FileMode.Create essentially means if this doesn't exist then create it 
+    BinaryFormatter bf = new BinaryFormatter();
+    bf.Serialize(stream, customerClient);
+    stream.Close();
+    //to prove info has been saved 
+    customerClient = null;
+    stream = File.Open("CustomerData.dat", FileMode.Open);
+    bf = new BinaryFormatter();
+    customerClient = (Customer)bf.Deserialize(stream);
+    stream.Close();
+    Console.WriteLine(customerClient.ToString);
 
-    public static void Main(string[] args)
+    XmlSerializer serializer = new XmlSerializer(typeof(Customer));
+    using (TextWriter tw = new StreamWriter(@"\revature\tyler_repo\projects\project_0\C#Data\customerClient.xml"))
     {
-      Customer customerClient = new Customer("Nicholas", "salad", 1, 1);
-      //to serialize object data to file
-      Stream stream = File.Open("CustomerData.dat", FileMode.Create);
-      //FileMode.Create essentially means if this doesn't exist then create it 
-      BinaryFormatter bf = new BinaryFormatter();
-      bf.Serialize(stream, customerClient);
-      stream.Close();
-      //to prove info has been saved 
-      customerClient = null;
-      stream = File.Open("CustomerData.dat", FileMode.Open);
-      bf = new BinaryFormatter();
-      customerClient = (Customer)bf.Deserialize(stream);
-      stream.Close();
-      Console.WriteLine(customerClient.ToString);
+      serializer.serialize(tw, customerClient);
     }
+
+    customerClient = null; //nullified because this information has been saved 
+    XmlSerializer deserializer = new XmlSerializer(typeof(Customer));
+    TextReader reader = new StreamReader("\revature\tyler_repo\projects\project_0\C#Data\customerClient.xml");
+    object obj = deserializer.Deserialize(reader);
+    customerClient = (Customer)obj;
+    reader.Close();
+    Console.WriteLine(customerClient.ToString);
+
+    //HelloSQL();
   }
 }
+
 
