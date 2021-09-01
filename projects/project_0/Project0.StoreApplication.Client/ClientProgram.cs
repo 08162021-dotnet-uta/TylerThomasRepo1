@@ -62,17 +62,6 @@ namespace Project0.StoreApplication.Client
 
       return selected - 1;
     }
-    /*private static void HelloSQL()
-    {
-      var def = new DemoEF();
-
-      def.SetCustomer(new Customer());
-
-      foreach (var item in def.GetCustomers())
-      {
-        Console.WriteLine(item);
-      }
-    }*/
   }
   private static void Main(string[] args)
   {

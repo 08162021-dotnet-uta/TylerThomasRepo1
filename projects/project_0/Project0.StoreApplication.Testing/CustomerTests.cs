@@ -24,7 +24,7 @@ namespace Project0.StoreApplication.Testing
       Name = "Tyler Thomas";
       return Name;
     }
-    public void Test_PastcustomerPurchases()
+    public void Test_PastCustomerPurchases()
     {
       Console.WriteLine("Do you want to view the purchase(s) you just made? \n Enter 'yes' or 'no'");
       string userResponse = Console.ReadLine();
